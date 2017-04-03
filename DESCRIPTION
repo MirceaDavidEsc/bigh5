@@ -8,6 +8,6 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
-Depends: rhdf5, dplyr
+Depends: rhdf5, dplyr, ggplot2
 LazyData: true
 RoxygenNote: 6.0.1

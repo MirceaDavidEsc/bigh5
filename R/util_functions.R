@@ -59,6 +59,19 @@ makeH5Index = function(filename, datasetName, indexCol, dataIndexName, rowSize =
 }
 
 
+
+
+#' Read all data belonging to a particular entry.
+#'
+#' @param hdf5Identifier
+#' @param datasetName
+#' @param indicesName
+#' @param frameNumbers
+#'
+#' @return
+#' @export
+#'
+#' @examples
 readDataAtFrame = function(hdf5Identifier,datasetName,indicesName,frameNumbers) {
   # Given the name of the file and the numeric value of the Frame for which you wish to load velocity field data, returns that longform data
   # Args:
@@ -110,11 +123,14 @@ reshapeArrayLongForm = function(myarr) {
 
 #' Plot of velocity field
 #'
-#' @param frameData
-#' @param arrowl
-#' @param colormapped
+#'This function takes in a 4-column data frame that contains the requisite data on a velocity field, where each row is
+#'a vector in space which has an x and y position and an x and y velocity component. It returns a ggplot object.
 #'
-#' @return
+#' @param frameData A 4-column data frame consisting of (from left to right) the x position, y position, x-component, and y-component of the velocity.
+#' @param arrowl A scalar multiple to apply to the velocity components, for visualization.
+#' @param colormapped If F, plot as arrow line segments. Else, plot as color heatmap.
+#'
+#' @return A ggplot2 object that is the plot of the velocity field.
 #' @export
 #'
 #' @examples
