@@ -1,3 +1,8 @@
+# Need to update package DESCRIPTION to make these dependencies.
+suppressWarnings(suppressPackageStartupMessages(require(rhdf5)))
+suppressWarnings(suppressPackageStartupMessages(require(dplyr)))
+
+
 #' Create a index table for an HDF5 dataset based on column
 #'
 #' \code{makeH5Index} takes a specified HDF5 dataset in a given file, and
@@ -53,11 +58,6 @@ makeH5Index = function(filename, datasetName, indexCol, dataIndexName, rowSize =
   h5write(countDF, filename, dataIndexName)
   return(countDF)
 }
-
-
-suppressWarnings(suppressPackageStartupMessages(require(rhdf5)))
-# DO NOT USE THE H5 PACKAGE! CRAN's package is broken and does not remove file handles correctly. It has memory leaks. It results in frequent crashes. Use rhdf5 from bioconductor from now on!
-suppressWarnings(suppressPackageStartupMessages(require(dplyr)))
 
 
 readDataAtFrame = function(hdf5Identifier,datasetName,indicesName,frameNumbers) {
