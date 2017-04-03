@@ -1,6 +1,6 @@
 # Need to update package DESCRIPTION to make these dependencies.
-suppressWarnings(suppressPackageStartupMessages(require(rhdf5)))
-suppressWarnings(suppressPackageStartupMessages(require(dplyr)))
+#suppressWarnings(suppressPackageStartupMessages(require(rhdf5)))
+#suppressWarnings(suppressPackageStartupMessages(require(dplyr)))
 
 
 #' Create a index table for an HDF5 dataset based on column
@@ -22,7 +22,6 @@ suppressWarnings(suppressPackageStartupMessages(require(dplyr)))
 #' @examples
 #' makeH5Index("foo.h5","/theData",3,"frameIndices")
 makeH5Index = function(filename, datasetName, indexCol, dataIndexName, rowSize = 1000000) {
-
 
   h5comp = h5ls(filename)
   maxRows = as.numeric(strsplit(h5comp$dim, " x ")[[1]][1])
