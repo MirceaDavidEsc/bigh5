@@ -63,10 +63,10 @@ makeH5Index = function(filename, datasetName, indexCol, dataIndexName, rowSize =
 
 #' Read all data belonging to a particular entry.
 #'
-#' @param hdf5Identifier
-#' @param datasetName
-#' @param indicesName
-#' @param frameNumbers
+#' @param hdf5Identifier The name of the hdf5 file.
+#' @param datasetName The dataset that contains the data you wish to load.
+#' @param indicesName A mapping of factor indices to rows in the data frame to load.
+#' @param frameNumbers The factors for which you fish to load your data.
 #'
 #' @return
 #' @export
@@ -90,15 +90,24 @@ readDataAtFrame = function(hdf5Identifier,datasetName,indicesName,frameNumbers) 
 }
 
 
+#' Read specified chunks of data in an HDF5 dataset.
+#'
+#' This function reads chunks from an HDF5 file with the name provided in filename and the chunks delimited by a data
+#'  frame called chunkDefineTable. This function should in general not be called, except through the readDataAtFrame function.
+#'
+#' chunkDefineTable must contain two columns with the names dataChunkStart and dataChunkEnd that specify the blocks
+#' of data to load.
+#'
+#' @param myFileName The HDF5 file from which to load the data
+#' @param datasetName The dataset name within the HDF5 file
+#' @param chunkDefineTable A table that contains a dataChunkStart and dataChunkEnd column.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 readLongformAtChunks = function(myFileName,datasetName,chunkDefineTable) {
-  # Reads chunks from an HDF5 file with the name provided in filename
-  # and the chunks delimited by a data frame called chunkDefineTable.
-  # Args:
-  #   chunkDefineTable: A table consisting of two columns specifying the start and end indices of the data chunk(s) to be read.
-  #   filename: A string specifying the name of the HDF5 file.
-  # Output:
-  #   The data stored in the HDF5 file at the rows specified by fileChunks. This is concatenated as one big data frame.
-  indicesList = mapply(FUN = function(x,y) x:y, chunkDefineTable$dataChunkStart, chunkDefineTable$dataChunkEnd)
+   indicesList = mapply(FUN = function(x,y) x:y, chunkDefineTable$dataChunkStart, chunkDefineTable$dataChunkEnd)
   indicesVector = unlist(indicesList)
   framesLongForm = tryCatch(
     {as.data.frame(h5read(myFileName,datasetName, index = list(indicesVector,NULL))) #Load all columns
