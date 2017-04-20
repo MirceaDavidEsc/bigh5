@@ -152,9 +152,9 @@ quiverPlot <- function(frameData,arrowl, colormapped=F) {
     frameData = frameData %>% mutate(speed = sqrt(v^2 + u^2), angle = atan2(x = u, y = v))
     cbPalette = c("magenta","red","yellow","green","cyan","blue","magenta")
     p = ggplot(frameData, aes(x, y, fill=angle, alpha=speed)) + geom_tile() +
-      scale_color_gradientn(colours = cbPalette, limits = c(-pi,pi), breaks=c(-pi, 0, pi),
+      scale_color_gradientn(name = expression(theta), colours = cbPalette, limits = c(-pi,pi), breaks=c(-pi, 0, pi),
                             labels=c(expression(paste("-",pi,sep="")), 0, expression(paste(pi)))) +
-      scale_fill_gradientn(colours = cbPalette, limits = c(-pi,pi), breaks=c(-pi, 0, pi),
+      scale_fill_gradientn(name = expression(theta), colours = cbPalette, limits = c(-pi,pi), breaks=c(-pi, 0, pi),
                            labels=c(expression(paste("-",pi,sep="")), 0, expression(paste(pi))))
 
   } else {
