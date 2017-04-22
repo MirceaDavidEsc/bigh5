@@ -118,6 +118,17 @@ readLongformAtChunks = function(myFileName,datasetName,chunkDefineTable) {
 }
 
 
+
+#' Transform matrix format to flatfile format.
+#'
+#'  Transforms a matrix of values into a long-form data frame.
+#'
+#' @param myarr A N-dimensional matrix.
+#'
+#' @return A data frame with (X*Y*Z...) columns rows and N columns.
+#' @export
+#'
+#' @examples
 reshapeArrayLongForm = function(myarr) {
   ### FUNCTION: Reshapes an array into a long-form data frame, while saving the indices of the data into the data frame.
   newarr = myarr
