@@ -1,11 +1,21 @@
 Package: bigh5
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Efficiently Access HDF5 Files Too Big for Memory
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Mircea Davidescu
+Maintainer: Mircea Davidescu <mirceadavidescu@outlook.com>
+Description: This package helps in accessing large HDF5 files by providing
+functions that allow a user to make a factor-based index of the HDF5 file.
+Chunks of the HDF5 file can then be loaded based on this factor index map. This
+type of functionality is especially useful when each factor has an uncertain
+amount of data/observables associated with it. As an example,
+consider a data frame that has the name of every living U.S. citizen in every year
+since 1776. Of course, the number of people changes throughout time, so you cannot
+use simple slicing and chunking operations that are a part of HDF5 base routines.
+Instead, we can make an index based on the year, that specifies which range of indices in
+the data correspond to which year. Then one can easily load, for example, everyone
+alive in 1776 and in 1831, and any other year they wish, just by using this index.
+
 License: What license is it under?
 Encoding: UTF-8
 Depends: rhdf5, dplyr, ggplot2
