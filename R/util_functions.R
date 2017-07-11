@@ -169,7 +169,7 @@ quiverPlot <- function(frameData,arrowl, colormapped=F) {
                            labels=c(expression(paste("-",pi,sep="")), 0, expression(paste(pi))))
 
   } else {
-    p = ggplot(frameData, aes(y, x, yend=x+v, xend=y+u)) +
+    p = ggplot(frameData, aes(x, y, xend=x+u, yend=y+v)) +
       geom_segment(arrow=arrow(angle=20,length=unit(0.2,"cm")))
   }
   p = p + coord_fixed(ratio = 1) + theme(axis.title = element_blank())
